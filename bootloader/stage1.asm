@@ -204,16 +204,17 @@ mem:
     JMP start
 
 bootjmp:
-    MOV [BOOT_DRIVE], DL
-
 ; Configurar segmento de destino para la Etapa 2 (0x0000:0x7e00)
     MOV AX, 0
+    MOV DX, AX
     MOV ES, AX
     MOV BX, 0x7E00
 
+    MOV [BOOT_DRIVE], DL
+
 ; Leer sector 2 del disco
     MOV AH, 0x02
-    MOV AL, 1
+    MOV AL, 8
     MOV CH, 0
     MOV DH, 0
     MOV CL, 2
